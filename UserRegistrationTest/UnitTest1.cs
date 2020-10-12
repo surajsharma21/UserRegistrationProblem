@@ -83,7 +83,7 @@ namespace UserRegistrationTest
         [TestMethod]
         public void GivenEmailId_WhenValidate_ShouldReturnFalse()
         {
-            string email = "sharma.suraj.com";
+            string email = "Sharma.suraj.com";
             //Act
             bool result = user.ValidateEmail(email);
             //Assert
@@ -101,11 +101,25 @@ namespace UserRegistrationTest
         [TestMethod]
         public void GivenPassword_WhenValidate_ShouldReturnFalse()
         {
-            string password = "suraj@21*";
+            string password = "suraj@123*";
             //Act
             bool result = user.ValidatePassword(password);
             //Assert
             Assert.IsFalse(result);
+        }
+        [TestMethod]
+        [DataRow("abc@yahoo.com")]
+        [DataRow("abc-100@yahoo.com")]
+        [DataRow("abc.100@yahoo.com")]
+        [DataRow("abc111@abc.com")]
+        [DataRow("abc.100@abc.com.au")]
+        [DataRow("abc-100@abc.net")]
+        [DataRow("abc@1.com")]
+        [DataRow("abc@gmail.com.com")]
+        [DataRow("abc+100@gmail.com")]
+        public void ValidateEmailId_Should_return_true(string email)
+        {
+            Assert.IsTrue(user.ValidateEmail(email));
         }
     }
 }
